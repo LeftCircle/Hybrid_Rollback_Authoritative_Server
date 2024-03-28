@@ -11,5 +11,22 @@ config_version=5
 [application]
 
 config/name="RollbackAuthServer"
+run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Server="*res://Singletons/Server.gd"
+HubConnection="*res://Singletons/StartupConnection/HubConnection.gd"
+PlayerVerification="*res://Singletons/StartupConnection/PlayerVerification.gd"
+CommandFrame="*res://Singletons/CommandFrame.gd"
+
+[file_customization]
+
+folder_colors={
+"res://Resources/": "yellow",
+"res://Scenes/": "green",
+"res://Singletons/": "purple",
+"res://Tests/": "red"
+}

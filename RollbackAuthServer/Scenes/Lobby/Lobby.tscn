@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsvuqhkxlhp61"]
+
+[ext_resource type="Script" path="res://Scenes/Lobby/Lobby.gd" id="1_ndijl"]
+
+[node name="Lobby" type="Node"]
+script = ExtResource("1_ndijl")
