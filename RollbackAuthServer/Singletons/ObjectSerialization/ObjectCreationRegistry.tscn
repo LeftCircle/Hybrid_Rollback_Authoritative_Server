@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brmeyjujn8ib2"]
+
+[ext_resource type="Script" path="res://Singletons/ObjectSerialization/ObjectCreationRegistry.gd" id="1_48jhp"]
+
+[node name="ObjectCreationRegistry" type="Node"]
+script = ExtResource("1_48jhp")

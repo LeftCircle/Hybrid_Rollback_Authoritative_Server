@@ -21,6 +21,7 @@ Server="*res://Singletons/Server.gd"
 HubConnection="*res://Singletons/StartupConnection/HubConnection.gd"
 PlayerVerification="*res://Singletons/StartupConnection/PlayerVerification.gd"
 CommandFrame="*res://Singletons/CommandFrame.gd"
+ObjectCreationRegistry="*res://Singletons/ObjectSerialization/ObjectCreationRegistry.tscn"
 
 [file_customization]
 

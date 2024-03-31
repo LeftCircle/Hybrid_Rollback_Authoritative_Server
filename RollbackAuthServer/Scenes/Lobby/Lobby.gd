@@ -67,23 +67,11 @@ func while_players_sync_command():
 		#_send_map_data()
 		_send_start_frame()
 
-func _send_map_data() -> void:
-	# If you have a procedurally generated map, you can send over the map
-	# data to be loaded by the client, then wait for them to finish loading before 
-	# moving on
-	#Map.send_map_data()
-	#state = LOADING_MAP
-	pass
-
 func all_players_synced():
 	for player_id in players_in_lobby.keys():
 		if not players_in_lobby[player_id] == SYNCED_COMMAND:
 			return false
 	return true
-
-func while_players_load_map():
-	if all_players_loaded() == true:
-		_send_start_frame()
 
 func _send_start_frame() -> void:
 	game_start_frame = CommandFrame.frame + START_IN_X_COMMAND_STEPS
@@ -95,29 +83,20 @@ func send_players_starting_step(game_start_step : int) -> void:
 	for player_id in players_in_lobby.keys():
 		Server.send_starting_command_step(player_id, game_start_step)
 
-func all_players_loaded() -> bool:
-	for player_id in players_in_lobby.keys():
-		if players_in_lobby[player_id] != MAP_LOADED:
-			return false
-	return true
-
 func while_waiting_for_start():
 	if CommandFrame.frame >= game_start_frame:
 		WorldState.start_sending_world_state()
-		PlayerStateSync.start_syncing_state()
 		PlayerSyncController.adjusting_process_speeds = true
 		_spawn_players()
-		Logging.log_line("GAME START!!")
-		print("Game start!!")
 		queue_free()
 
 func _spawn_players():
 	# Spawn players and sync the serialized_id's to uids
 	for player_id in players_in_lobby.keys():
-		Map.spawn_new_player(player_id)
-		var class_instance_id = Map.get_player_node(player_id).netcode.class_instance_id
+		var spawned_player = null
+		var instance_id = spawned_player.netcode.class_instance_id
 		Server.send_client_serialization(player_id, class_instance_id)
-
+		assert(false, "Need a way to spawn the players")
 
 func player_ready(player_serialized_id) -> void:
 	if not players_in_lobby[player_serialized_id] == READY:
@@ -130,6 +109,23 @@ func player_not_ready(player_id) -> void:
 
 func player_command_step_synced(player_id) -> void:
 	players_in_lobby[player_id] = SYNCED_COMMAND
+
+#func _send_map_data() -> void:
+	# If you have a procedurally generated map, you can send over the map
+	# data to be loaded by the client, then wait for them to finish loading before 
+	# moving on
+	#Map.send_map_data()
+	#state = LOADING_MAP
+
+#func while_players_load_map():
+	#if all_players_loaded() == true:
+		#_send_start_frame()
+
+#func all_players_loaded() -> bool:
+	#for player_id in players_in_lobby.keys():
+		#if players_in_lobby[player_id] != MAP_LOADED:
+			#return false
+	#return true
 
 #func player_map_loaded(player_id : int, client_command_step : int, server_command_step : int):
 	#players_in_lobby[player_id] = MAP_LOADED
