@@ -1,0 +1,34 @@
+{
+  "hidden_columns": {
+    "res://Resources/Components/": {
+      "resource_local_to_scene": true,
+      "resource_name": true
+    },
+    "res://Resources/Components/NetcodeData/": {
+      "resource_local_to_scene": true,
+      "resource_name": true
+    },
+    "res://Resources/Components/SyncedComponents/": {
+      "resource_local_to_scene": true,
+      "resource_name": true
+    },
+    "res://Resources/Components/SyncedComponents/Move/": {
+      "resource_local_to_scene": true,
+      "resource_name": true
+    }
+  },
+  "recent_paths": [
+    "res://Resources/Components/",
+    "res://Resources/Components/SyncedComponents/Move/",
+    "res://Resources/Components/NetcodeData/",
+    "res://Resources/Components/SyncedComponents/"
+  ],
+  "table_functions": {
+    "filter": [
+      "return true"
+    ],
+    "process": [
+      "return value"
+    ]
+  }
+}

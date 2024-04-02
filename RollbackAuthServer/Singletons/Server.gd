@@ -26,19 +26,21 @@ func _on_packet_received(id : int, packet) -> void:
 	if packet_type == packet_types.INPUTS:
 		_receive_player_inputs(id, packet)
 	elif packet_type == packet_types.ITERATION_CHANGE:
-		PlayerSyncController.client_is_at_normal_iterations(id)
+		#TODO -> add player sync controller
+		#PlayerSyncController.client_is_at_normal_iterations(id)
+		pass
 	else:
 		assert(false, "Packet type not yet supported " + str(packet_type))
 
 func _receive_player_inputs(id, packet : Array) -> void:
-	InputProcessing.receive_unreliable_history(id, packet)
+	# TODO -> add InputProcessing
+	#InputProcessing.receive_unreliable_history(id, packet)
 	if ProjectSettings.get_setting("global/rollback_enabled") and ObjectCreationRegistry.network_id_to_instance_id.has(id):
 		#var input_history = InputHistoryCompresser.get_input_bytes(packet)
 		var instance_id = ObjectCreationRegistry.network_id_to_instance_id[id]
 		# TO DO -> error here if more than 255 players
 		packet += [instance_id]
 		packet += [packet_types.INPUTS]
-		Logging.log_line("Received inputs from player_id " + str(id))
 		for player_id in server_api.get_peers():
 			if player_id != id and player_id != 0:
 				server_api.send_bytes(packet, player_id, MultiplayerPeer.TRANSFER_MODE_UNRELIABLE)

@@ -6,13 +6,13 @@ var max_players : int = 100
 
 func init_server(scene_tree : SceneTree, network : ENetMultiplayerPeer, server_api : SceneMultiplayer, server_node : Node) -> void:
 	connect_and_check_connection(scene_tree, network, server_api, server_node)
-	start_server(network, server_api)
+	start_server(network, server_api, server_node)
 
-func start_server(network : ENetMultiplayerPeer, server_api : SceneMultiplayer):
+func start_server(network : ENetMultiplayerPeer, server_api : SceneMultiplayer, server_node : Node):
 	print("Server has started!!")
 	network.connect("peer_connected",Callable(self,"_peer_connected"))
 	network.connect("peer_disconnected",Callable(self,"_peer_disconnected"))
-	server_api.peer_packet.connect(self._on_packet_received)
+	server_api.peer_packet.connect(server_node._on_packet_received)
 
 func connect_and_check_connection(scene_tree : SceneTree, network : ENetMultiplayerPeer, server_api : SceneMultiplayer, server_node : Node):
 	var server_status = network.create_server(port, max_players)

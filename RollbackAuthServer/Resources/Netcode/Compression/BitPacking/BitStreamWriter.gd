@@ -106,7 +106,7 @@ func compress_enum(enum_value : int, n_enums : int):
 	var required_bits = BaseCompression.n_bits_for_int(n_enums)
 	compress_int_into_x_bits(enum_value, required_bits)
 
-func compress_class_instance(instance_id : int) -> void:
+func compress_instance_id(instance_id : int) -> void:
 	gaffer_write_int(instance_id, N_CLASS_INSTANCE_BITS)
 
 func compress_class_id(class_id : int) -> void:

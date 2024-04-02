@@ -1,3 +1,2 @@
-extends CharacterBody2D
+extends BaseEntity
 class_name S_PlayerCharacter
-

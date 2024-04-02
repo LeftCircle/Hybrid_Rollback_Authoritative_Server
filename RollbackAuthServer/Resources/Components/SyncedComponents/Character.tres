@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="NetcodeData" load_steps=2 format=3 uid="uid://cns1f7n286y6e"]
+
+[ext_resource type="Script" path="res://Resources/Netcode/Components/NetcodeData.gd" id="1_nhp7e"]
+
+[resource]
+script = ExtResource("1_nhp7e")
+class_id = &"CHR"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://btfq8xhas6pwj"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_vvahu"]
+
+[resource]
+script = ExtResource("1_vvahu")
+base_folder = "res://Resources/Components/LocalComponents"
+includes = Array[String]([])
+excludes = Array[String]([])
+paths = Array[String]([])

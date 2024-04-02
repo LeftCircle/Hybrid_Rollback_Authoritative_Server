@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MoveCompressor" load_steps=3 format=3 uid="uid://c6bwqpa2f8u3p"]
+
+[ext_resource type="Script" path="res://Resources/Netcode/Compression/ComponentCompressors/MoveCompressor.gd" id="1_au702"]
+[ext_resource type="Resource" uid="uid://dsiyds51uito" path="res://Resources/Components/SyncedComponents/Move.tres" id="1_wcism"]
+
+[resource]
+script = ExtResource("1_au702")
+res_to_compress = ExtResource("1_wcism")
