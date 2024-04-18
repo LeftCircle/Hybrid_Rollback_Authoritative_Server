@@ -10,8 +10,8 @@ func init_server(scene_tree : SceneTree, network : ENetMultiplayerPeer, server_a
 
 func start_server(network : ENetMultiplayerPeer, server_api : SceneMultiplayer, server_node : Node):
 	print("Server has started!!")
-	network.connect("peer_connected",Callable(self,"_peer_connected"))
-	network.connect("peer_disconnected",Callable(self,"_peer_disconnected"))
+	network.peer_connected.connect(server_node._on_peer_connected)
+	network.peer_disconnected.connect(server_node._on_peer_disconnected)
 	server_api.peer_packet.connect(server_node._on_packet_received)
 
 func connect_and_check_connection(scene_tree : SceneTree, network : ENetMultiplayerPeer, server_api : SceneMultiplayer, server_node : Node):

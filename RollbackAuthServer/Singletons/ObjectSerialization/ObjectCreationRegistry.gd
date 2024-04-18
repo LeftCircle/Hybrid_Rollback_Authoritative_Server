@@ -15,10 +15,12 @@ func _ready():
 
 # NOTE -> You can get a 7x performance increase by writing
 # a create_new() function on each script. This can be automated
-# when godot is saved. See how ResourceGroup does it. 
+# when godot is saved. See how ResourceGroup does it.
 func new_obj(class_id : StringName) -> NetcodeData:
-	# TODO -> Assign class instance here
-	return class_id_to_resource[class_id].duplicate()
+	var new_obj = class_id_to_resource[class_id].duplicate()
+	new_obj.instance_id = class_id_to_class_counter[class_id]
+	class_id_to_class_counter[class_id] += 1
+	return new_obj
 
 func assign_class_instance_id(entity) -> void:
 	var class_id : String = entity.netcode.class_id
@@ -45,7 +47,7 @@ func _map_compressors() -> void:
 	var compressors : Array[Resource]
 	bulk_compressors.load_all_into(compressors)
 	for compressor in compressors:
-		var class_id : StringName = compressor.component.class_id
+		var class_id : StringName = compressor.res_to_compress.class_id
 		class_id_to_compressor[class_id] = compressor
 
 static func id_to_int(id : StringName) -> int:

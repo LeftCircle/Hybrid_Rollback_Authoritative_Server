@@ -94,8 +94,9 @@ func _spawn_players():
 	# Spawn players and sync the serialized_id's to uids
 	for player_id in players_in_lobby.keys():
 		var spawned_player = null
-		var instance_id = spawned_player.netcode.class_instance_id
-		Server.send_client_serialization(player_id, class_instance_id)
+		var new_enet_id : ENetID = ObjectCreationRegistry.new_obj("EID")
+		new_enet_id.id = player_id
+		spawned_player.add_component(new_enet_id)
 		assert(false, "Need a way to spawn the players")
 
 func player_ready(player_serialized_id) -> void:

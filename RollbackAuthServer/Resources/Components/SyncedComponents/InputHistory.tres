@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="InputHistory" load_steps=2 format=3 uid="uid://cuelcub2uvikp"]
+
+[ext_resource type="Script" path="res://Resources/Components/SyncedComponents/InputHistory.gd" id="1_rbmr5"]
+
+[resource]
+script = ExtResource("1_rbmr5")
+class_id = &"INH"

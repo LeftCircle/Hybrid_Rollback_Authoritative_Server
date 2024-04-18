@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="InputAction" load_steps=2 format=3 uid="uid://cfghkga28vhev"]
+
+[ext_resource type="Script" path="res://Resources/Components/LocalComponents/InputAction.gd" id="1_y01ue"]
+
+[resource]
+script = ExtResource("1_y01ue")
+class_id = &"INP"

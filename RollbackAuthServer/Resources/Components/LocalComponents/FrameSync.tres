@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="FrameSync" load_steps=2 format=3 uid="uid://bgcm6s47wbkcl"]
+
+[ext_resource type="Script" path="res://Resources/Components/LocalComponents/FrameSync.gd" id="1_tlan2"]
+
+[resource]
+script = ExtResource("1_tlan2")
+class_id = &"FSY"

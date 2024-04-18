@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://brmeyjujn8ib2"]
+[gd_scene load_steps=4 format=3 uid="uid://brmeyjujn8ib2"]
 
 [ext_resource type="Script" path="res://Singletons/ObjectSerialization/ObjectCreationRegistry.gd" id="1_48jhp"]
 [ext_resource type="Resource" uid="uid://c352ljlp7k17u" path="res://Resources/Components/AllSyncedComponents.tres" id="2_f2hts"]
+[ext_resource type="Resource" uid="uid://dh00ur3aprpga" path="res://Resources/Components/BulkCompressors.tres" id="3_q4701"]
 
 [node name="ObjectCreationRegistry" type="Node"]
 script = ExtResource("1_48jhp")
 synced_component_group = ExtResource("2_f2hts")
+bulk_compressors = ExtResource("3_q4701")

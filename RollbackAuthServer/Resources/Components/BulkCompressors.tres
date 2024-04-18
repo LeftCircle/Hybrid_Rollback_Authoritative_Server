@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_5c1r2")
-base_folder = "res://Resources/Netcode/Compression/ComponentCompressors"
+base_folder = "res://Resources/Components/Compressors"
 includes = Array[String](["*.tres"])
 excludes = Array[String]([])
-paths = Array[String](["res://Resources/Netcode/Compression/ComponentCompressors/MoveCompressor.tres"])
+paths = Array[String](["res://Resources/Components/Compressors/MoveCompressor.tres"])

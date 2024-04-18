@@ -1,6 +1,6 @@
 extends GutTest
 
-var bulk_compressor_group : ResourceGroup = load("res://Resources/Netcode/Compression/BulkCompressors.tres")
+var bulk_compressor_group : ResourceGroup = load("res://Resources/Components/BulkCompressors.tres")
 
 func test_we_can_get_the_compress_function_using_resource_groups() -> void:
 	var compressors : Array[Resource] = []
@@ -9,4 +9,4 @@ func test_we_can_get_the_compress_function_using_resource_groups() -> void:
 		assert_true(compressor.has_method("compress_update"))
 		assert_true(compressor.has_method("compress_create"))
 
-	
+

@@ -21,6 +21,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 [application]
 
 config/name="RollbackAuthServer"
+config/tags=PackedStringArray("llsdemo")
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
@@ -32,6 +33,8 @@ HubConnection="*res://Singletons/StartupConnection/HubConnection.gd"
 PlayerVerification="*res://Singletons/StartupConnection/PlayerVerification.gd"
 CommandFrame="*res://Singletons/CommandFrame.gd"
 ObjectCreationRegistry="*res://Singletons/ObjectSerialization/ObjectCreationRegistry.tscn"
+InputSystem="*res://Singletons/Inputs/InputSystem.gd"
+FrameSyncSystem="*res://Singletons/Inputs/FrameSyncSystem.gd"
 
 [editor_plugins]
 
@@ -40,8 +43,13 @@ enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg", "res:
 [file_customization]
 
 folder_colors={
+"res://RefCounted/": "blue",
 "res://Resources/": "yellow",
 "res://Scenes/": "green",
 "res://Singletons/": "purple",
 "res://Tests/": "red"
 }
+
+[global]
+
+input_buffer=0
