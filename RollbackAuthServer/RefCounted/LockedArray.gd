@@ -16,4 +16,9 @@ func get_data_to_process() -> Array:
 	_received_data.clear()
 	mutex.unlock()
 	return _data_to_return
-	
+
+func reset() -> void:
+	mutex.lock()
+	_received_data.clear()
+	_data_to_return.clear()
+	mutex.unlock()

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="StableBufferData" load_steps=2 format=3 uid="uid://bx4hoofa05omr"]
+
+[ext_resource type="Script" path="res://Resources/Components/LocalComponents/StableBufferData.gd" id="1_4ypd0"]
+
+[resource]
+script = ExtResource("1_4ypd0")
+class_id = &"SBD"

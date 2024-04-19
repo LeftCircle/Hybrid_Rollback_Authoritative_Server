@@ -7,12 +7,16 @@ const HALF_MAX_FRAME = MAX_FRAME_NUMBER / 2
 var frame_length_sec : float = 1.0 / float(ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
 var frame_length_msec : float = frame_length_sec * 1000
 var frame = 0
+## The frame that inputs are executed for. If there is an input buffer, we grab inputs from x frames back.
+var input_buffer : int = ProjectSettings.get_setting("global/input_buffer")
 
+var input_frame : int = 0
 var previous_command_frame : int = -1
 
 func execute():
 	previous_command_frame = frame
 	frame = (frame + 1) % MAX_FRAME_NUMBER
+	input_frame = get_previous_frame(frame, input_buffer)
 
 static func is_more_recent_than(future_frame : int, past_frame : int) -> bool:
 	return (((future_frame > past_frame) and (future_frame - past_frame <= HALF_MAX_FRAME)) or
@@ -36,3 +40,6 @@ static func frame_difference(future_frame : int, past_frame : int) -> int:
 			return future_frame + frames_till_wrap
 	else:
 		return future_frame - past_frame
+
+static func next_frame(frame : int) -> int:
+	return (frame + 1) % MAX_FRAME_NUMBER

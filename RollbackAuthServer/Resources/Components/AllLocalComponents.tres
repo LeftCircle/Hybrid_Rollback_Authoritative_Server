@@ -7,4 +7,4 @@ script = ExtResource("1_vvahu")
 base_folder = "res://Resources/Components/LocalComponents"
 includes = Array[String](["*.tres"])
 excludes = Array[String]([])
-paths = Array[String](["res://Resources/Components/LocalComponents/FrameSync.tres", "res://Resources/Components/LocalComponents/InputAction.tres"])
+paths = Array[String](["res://Resources/Components/LocalComponents/CFSyncData.tres", "res://Resources/Components/LocalComponents/InputAction.tres", "res://Resources/Components/LocalComponents/StableBuffer.tres"])

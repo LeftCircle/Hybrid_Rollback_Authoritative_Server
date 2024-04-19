@@ -31,10 +31,12 @@ config/icon="res://icon.svg"
 Server="*res://Singletons/Server.gd"
 HubConnection="*res://Singletons/StartupConnection/HubConnection.gd"
 PlayerVerification="*res://Singletons/StartupConnection/PlayerVerification.gd"
-CommandFrame="*res://Singletons/CommandFrame.gd"
+CommandFrame="*res://Singletons/CommandFrame/CommandFrame.gd"
 ObjectCreationRegistry="*res://Singletons/ObjectSerialization/ObjectCreationRegistry.tscn"
 InputSystem="*res://Singletons/Inputs/InputSystem.gd"
 FrameSyncSystem="*res://Singletons/Inputs/FrameSyncSystem.gd"
+StableBufferSystem="*res://Singletons/Inputs/StableBufferSystem.gd"
+CommandFrameSyncSystem="*res://Singletons/CommandFrame/CommandFrameSyncSystem.gd"
 
 [editor_plugins]
 

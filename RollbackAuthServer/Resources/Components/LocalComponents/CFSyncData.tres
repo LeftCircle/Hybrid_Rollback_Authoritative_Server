@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CommandFrameSyncData" load_steps=2 format=3 uid="uid://b6wraa18i0mef"]
+
+[ext_resource type="Script" path="res://Resources/Components/LocalComponents/CommandFrameSyncData.gd" id="1_03bbd"]
+
+[resource]
+script = ExtResource("1_03bbd")
+class_id = &"CFS"
