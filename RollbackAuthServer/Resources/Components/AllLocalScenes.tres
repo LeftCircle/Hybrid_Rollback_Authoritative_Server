@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://c74o72l3621xa"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_tctmk"]
+
+[resource]
+script = ExtResource("1_tctmk")
+base_folder = "res://Resources/Components/LocalScenes"
+includes = Array[String](["*.tres"])
+excludes = Array[String]([])
+paths = Array[String](["res://Resources/Components/LocalScenes/ECSCharacterBody2D.tres"])

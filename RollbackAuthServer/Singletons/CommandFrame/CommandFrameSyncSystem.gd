@@ -41,22 +41,20 @@ func adjust_processing_speeds():
 	for id in _stable_buffers.keys():
 		var sbd : StableBufferData = _stable_buffers[id]
 		if sbd.current_bufffer_in_frames >= sbd.stable_buffer and sbd.current_bufffer_in_frames <= sbd.max_buffer:
-			# Run normal speed
 			_run_at_normal_speed(id)
 		elif sbd.current_bufffer_in_frames < sbd.stable_buffer:
-			# speed up!!
 			_speed_up(id)
 		elif sbd.current_bufffer_in_frames >= sbd.max_buffer:
 			_slow_down_buffer_to_stable(id, sbd.current_bufffer_in_frames, sbd.stable_buffer)
 
 func _run_at_normal_speed(network_id : int) -> void:
 	if iteration_speed[network_id] != SPEEDS.NORMAL:
-		Server.send_iteration_change(network_id, SPEEDS.NORMAL)
+		send_packet(network_id, SPEEDS.NORMAL)
 		iteration_speed[network_id] = SPEEDS.NORMAL
 
 func _speed_up(network_id : int) -> void:
 	if iteration_speed[network_id] != SPEEDS.FAST:
-		Server.send_iteration_change(network_id, SPEEDS.FAST)
+		send_packet(network_id, SPEEDS.FAST)
 		iteration_speed[network_id] = SPEEDS.FAST
 
 func _on_player_disconnect(network_id : int) -> void:
@@ -69,7 +67,16 @@ func _slow_down_buffer_to_stable(network_id : int, input_buffer_size : float, st
 		if frames_ahead <= 0:
 			return
 		var n_slow_frames = int(round((frames_ahead) / BUFFER_DENOM))
-		Server.send_iteration_change(network_id, SPEEDS.SLOW, n_slow_frames)
+		send_packet(network_id, SPEEDS.SLOW, n_slow_frames)
 		iteration_speed[network_id] = SPEEDS.SLOW
 
+func send_packet(network_id : int, speed : SPEEDS, n_slow_frames : int = 0) -> void:
+	var packet : Packet = PacketFlow.new_packet(Packet.TYPE.ITERATION_CHANGE, network_id)
+	BitStreamWriter.gaffer_write_int(packet.bit_stream, speed, 2)
+	BitStreamWriter.variable_compress(packet.bit_stream, n_slow_frames)
+	packet.bit_stream.mbuffer = BitStreamWriter.get_byte_array(packet.bit_stream)
+	Server.send_packet(packet)
 
+
+func has(enet_id : int) -> bool:
+	return iteration_speed.has(enet_id)

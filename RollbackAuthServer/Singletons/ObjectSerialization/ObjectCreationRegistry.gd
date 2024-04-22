@@ -2,6 +2,7 @@ extends Node
 
 @export var synced_component_group : ResourceGroup
 @export var bulk_compressors : ResourceGroup
+@export var local_scenes_group : ResourceGroup
 
 var class_id_to_class_counter = {}
 var network_id_to_instance_id = {}
@@ -16,7 +17,7 @@ func _ready():
 # NOTE -> You can get a 7x performance increase by writing
 # a create_new() function on each script. This can be automated
 # when godot is saved. See how ResourceGroup does it.
-func new_obj(class_id : StringName) -> NetcodeData:
+func new_obj(class_id : StringName):
 	var new_obj = class_id_to_resource[class_id].duplicate()
 	new_obj.instance_id = class_id_to_class_counter[class_id]
 	class_id_to_class_counter[class_id] += 1
@@ -31,15 +32,27 @@ func _serialize_entities_and_components():
 	var synced_components : Array[NetcodeData]
 	synced_component_group.load_all_into(synced_components)
 	for component in synced_components:
-		serialize_class_id(component)
+		serialize_synced_comp(component)
+	_serialize_scenes()
 
-func serialize_class_id(component : NetcodeData) -> void:
+func _serialize_scenes() -> void:
+	var local_scenes : Array = []
+	local_scenes_group.load_all_into(local_scenes)
+	for scene_res in local_scenes:
+		var scene = scene_res.scene.instantiate()
+		scene.class_id = scene_res.class_id
+		serialize_local_comp(scene)
+
+func serialize_synced_comp(component : NetcodeData) -> void:
+	serialize_local_comp(component)
+	var num_id = id_to_int(component.class_id)
+	component.class_id_int = num_id
+
+func serialize_local_comp(component) -> void:
 	var class_id = component.class_id
-	var num_id = id_to_int(class_id)
 	if class_id_to_class_counter.has(class_id):
 		assert(false) #,"This class_id already exists: " + str(class_id))
 	else:
-		component.class_id_int = num_id
 		class_id_to_class_counter[class_id] = 0
 		class_id_to_resource[class_id] = component
 
@@ -69,4 +82,8 @@ func reverse_cantor(cantor_number : int):
 	var y : int = cantor_number - t
 	var x : int = w - y
 	return [x, y]
+
+func _exit_tree() -> void:
+	for id in class_id_to_resource:
+		class_id_to_resource[id].free()
 

@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_y6p8u")
 base_folder = "res://Resources/Components/SyncedComponents"
-includes = Array[String](["*.tres"])
+includes = Array[String](["*.tres", "*.tscn"])
 excludes = Array[String]([])
 paths = Array[String](["res://Resources/Components/SyncedComponents/Character.tres", "res://Resources/Components/SyncedComponents/ENetID.tres", "res://Resources/Components/SyncedComponents/InputHistory.tres", "res://Resources/Components/SyncedComponents/Move.tres"])

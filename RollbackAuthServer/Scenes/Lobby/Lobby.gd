@@ -94,9 +94,7 @@ func _spawn_players():
 	# Spawn players and sync the serialized_id's to uids
 	for player_id in players_in_lobby.keys():
 		var spawned_player = null
-		var new_enet_id : ENetID = ObjectCreationRegistry.new_obj("EID")
-		new_enet_id.id = player_id
-		spawned_player.add_component(new_enet_id)
+		spawned_player.add_enet_id(player_id)
 		assert(false, "Need a way to spawn the players")
 
 func player_ready(player_serialized_id) -> void:
@@ -113,7 +111,7 @@ func player_command_step_synced(player_id) -> void:
 
 #func _send_map_data() -> void:
 	# If you have a procedurally generated map, you can send over the map
-	# data to be loaded by the client, then wait for them to finish loading before 
+	# data to be loaded by the client, then wait for them to finish loading before
 	# moving on
 	#Map.send_map_data()
 	#state = LOADING_MAP

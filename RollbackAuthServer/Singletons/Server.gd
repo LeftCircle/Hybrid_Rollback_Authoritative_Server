@@ -17,6 +17,9 @@ func _ready() -> void:
 	server_initalizer.init_server(get_tree(), network, server_api, self)
 	_create_token_expiration_timer()
 
+func send_packet(packet : Packet) -> void:
+	server_api.send_bytes(packet.bit_stream.mBuffer, packet.target, packet.transfer_mode, packet.channel)
+
 ####################################################################################################
 ######### Player Data
 ####################################################################################################

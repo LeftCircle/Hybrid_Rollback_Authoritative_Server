@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2cnd4oujvipt"]
+
+[ext_resource type="Script" path="res://Scenes/Components/ECSCharacterBody2D.gd" id="1_ue3c5"]
+
+[node name="EcsCharacterBody2d" type="CharacterBody2D"]
+script = ExtResource("1_ue3c5")

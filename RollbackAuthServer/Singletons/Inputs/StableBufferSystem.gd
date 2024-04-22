@@ -47,3 +47,9 @@ func _on_player_disconnected(_enet_id : int) -> void:
 		if buffer_data.packet_peer.get_state() == ENetPacketPeer.STATE_DISCONNECTED:
 			buffer_data_array.erase(buffer_data)
 			break
+
+func has(enet_id : int) -> bool:
+	for buffer_data in buffer_data_array:
+		if buffer_data.packet_peer.get_enet_id() == enet_id:
+			return true
+	return false

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LocalScene" load_steps=3 format=3 uid="uid://0vdgrdcvtn8b"]
+
+[ext_resource type="Script" path="res://Resources/Components/LocalScenes/LocalScene.gd" id="1_hegi3"]
+[ext_resource type="PackedScene" uid="uid://b2cnd4oujvipt" path="res://Scenes/Components/ECSCharacterBody2D.tscn" id="1_qh2vn"]
+
+[resource]
+script = ExtResource("1_hegi3")
+scene = ExtResource("1_qh2vn")
+class_id = &"CBD"

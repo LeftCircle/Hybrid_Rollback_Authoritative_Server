@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://5uviwwehija"]
+[gd_scene load_steps=4 format=3 uid="uid://5uviwwehija"]
 
 [ext_resource type="Script" path="res://Scenes/Character/S_PlayerCharacter.gd" id="1_1k5vp"]
 [ext_resource type="Resource" uid="uid://cns1f7n286y6e" path="res://Resources/Components/SyncedComponents/Character.tres" id="2_f04mt"]
+[ext_resource type="Script" path="res://Scenes/Components/ECSCharacterBody2D.gd" id="3_ys4dt"]
 
 [node name="SPlayerCharacter" type="Node"]
 script = ExtResource("1_1k5vp")
 netcode = ExtResource("2_f04mt")
+
+[node name="ECSCharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("3_ys4dt")
