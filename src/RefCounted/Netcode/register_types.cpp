@@ -1,5 +1,6 @@
 #include "register_types.h"
 
+#include "BitStream.h"
 #include "Packet.h"
 
 #include <gdextension_interface.h>

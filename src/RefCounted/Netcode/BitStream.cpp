@@ -4,6 +4,21 @@ using namespace godot;
 
 void BitStream::_bind_methods()
 {
+	BIND_CONSTANT(WORD_SIZE);
+	BIND_CONSTANT(SCRATCH_SIZE);
+	BIND_CONSTANT(FOUR_BYTES);
+	BIND_CONSTANT(WORD_SIZE_IN_BYTES);
+	BIND_CONSTANT(SCRATCH_SIZE_BYTES);
+	BIND_CONSTANT(MAX_BYTES);
+	BIND_CONSTANT(VARIABLE_COMPRESS_BITS_FOR_SIZE);
+	BIND_CONSTANT(UNIT_VECTOR_FLOAT_BITS);
+	BIND_CONSTANT(N_CLASS_INSTANCE_BITS);
+	BIND_CONSTANT(N_CLASS_ID_BITS);
+	BIND_CONSTANT(BITS_FOR_N_OBJECTS);
+	BIND_CONSTANT(BYTES_FOR_N_BITS);
+	BIND_CONSTANT(BYTES_FOR_FRAME);
+	BIND_CONSTANT(BITS_FOR_FRAME);
+
 	ClassDB::bind_method(D_METHOD("init_buffer", "buffer_size"), &BitStream::init_buffer, DEFVAL(MAX_BYTES));
 
 	ClassDB::bind_method(D_METHOD("reset"), &BitStream::reset);
@@ -31,21 +46,6 @@ void BitStream::_bind_methods()
 	ClassDB::add_property("BitStream", PropertyInfo(Variant::INT, "word_index"), "set_word_index", "get_word_index");
 	ClassDB::add_property("BitStream", PropertyInfo(Variant::INT, "total_bits"), "set_total_bits", "get_total_bits");
 	ClassDB::add_property("BitStream", PropertyInfo(Variant::INT, "read_bits"), "set_read_bits", "get_read_bits");
-
-	BIND_CONSTANT(WORD_SIZE);
-	BIND_CONSTANT(SCRATCH_SIZE);
-	BIND_CONSTANT(FOUR_BYTES);
-	BIND_CONSTANT(WORD_SIZE_IN_BYTES);
-	BIND_CONSTANT(SCRATCH_SIZE_BYTES);
-	BIND_CONSTANT(MAX_BYTES);
-	BIND_CONSTANT(VARIABLE_COMPRESS_BITS_FOR_SIZE);
-	BIND_CONSTANT(UNIT_VECTOR_FLOAT_BITS);
-	BIND_CONSTANT(N_CLASS_INSTANCE_BITS);
-	BIND_CONSTANT(N_CLASS_ID_BITS);
-	BIND_CONSTANT(BITS_FOR_N_OBJECTS);
-	BIND_CONSTANT(BYTES_FOR_N_BITS);
-	BIND_CONSTANT(BYTES_FOR_FRAME);
-	BIND_CONSTANT(BITS_FOR_FRAME);
 }
 
 void BitStream::init_buffer(int buffer_size)
