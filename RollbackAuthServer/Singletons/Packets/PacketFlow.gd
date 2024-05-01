@@ -25,12 +25,12 @@ func new_packet(type : Packet.TYPE, target : int = SEND_TO_ALL) -> Packet:
 	packet.target = target
 	packet.channel = packet.type
 	packet.transfer_mode = TYPE_TO_MODE[type]
-	packet.bit_stream.init_buffer()
+	packet.init_buffer()
 	_packet_compressor.compress(packet)
 	return packet
 
 func read_packet_data(byte_array) -> Packet:
 	var packet = Packet.new()
-	BitStreamReader.init_read(packet.bit_stream, byte_array)
+	BitStreamReader.init_read(packet, byte_array)
 	_packet_compressor.decompress(packet)
 	return packet

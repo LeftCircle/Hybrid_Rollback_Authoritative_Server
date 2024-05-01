@@ -1,6 +1,8 @@
 extends RefCounted
 #class_name Packet
 
+var packet : Packet
+
 enum TYPE{
 	CREATION,
 	UPDATE,

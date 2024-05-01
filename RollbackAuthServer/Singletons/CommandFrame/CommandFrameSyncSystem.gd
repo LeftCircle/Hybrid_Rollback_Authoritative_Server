@@ -72,9 +72,9 @@ func _slow_down_buffer_to_stable(network_id : int, input_buffer_size : float, st
 
 func send_packet(network_id : int, speed : SPEEDS, n_slow_frames : int = 0) -> void:
 	var packet : Packet = PacketFlow.new_packet(Packet.TYPE.ITERATION_CHANGE, network_id)
-	BitStreamWriter.gaffer_write_int(packet.bit_stream, speed, 2)
-	BitStreamWriter.variable_compress(packet.bit_stream, n_slow_frames)
-	packet.bit_stream.mbuffer = BitStreamWriter.get_byte_array(packet.bit_stream)
+	BitStreamWriter.gaffer_write_int(packet, speed, 2)
+	BitStreamWriter.variable_compress(packet, n_slow_frames)
+	packet.mbuffer = BitStreamWriter.get_byte_array(packet)
 	Server.send_packet(packet)
 
 

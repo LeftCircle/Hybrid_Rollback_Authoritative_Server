@@ -24,13 +24,13 @@ func add_data(netcode) -> void:
 func create_packet(enet_id : int) -> Packet:
 	# [class_id, n_objects, object_data, class_id, n_objects, object_data, ....]
 	for class_id_int in class_dictionary.keys():
-		compress_class_objects(class_id_int, packet.bit_stream)
-	var byte_array : PackedByteArray = BitStreamWriter.get_byte_array(packet.bit_stream)
+		compress_class_objects(class_id_int, packet)
+	var byte_array : PackedByteArray = BitStreamWriter.get_byte_array(packet)
 	byte_array += BaseCompression.compress_int_to_x_bytes(CommandFrame.frame, BitStream.BYTES_FOR_FRAME)
-	byte_array += BaseCompression.compress_int_to_x_bytes(packet.bit_stream.total_bits, BitStream.BYTES_FOR_N_BITS)
+	byte_array += BaseCompression.compress_int_to_x_bytes(packet.total_bits, BitStream.BYTES_FOR_N_BITS)
 	if byte_array.size() > 1450:
 		print("BYTE ARRAY TOO BIG!!! %s" % [byte_array.size()])
-	packet.bit_stream.mBuffer = byte_array
+	packet.mBuffer = byte_array
 	packet.target = enet_id
 	return packet
 

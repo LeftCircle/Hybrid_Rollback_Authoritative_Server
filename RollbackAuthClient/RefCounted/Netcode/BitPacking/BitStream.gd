@@ -1,5 +1,5 @@
 extends RefCounted
-class_name BitStream
+#class_name BitStream
 
 const WORD_SIZE : int = 32
 const SCRATCH_SIZE : int = 2 * WORD_SIZE

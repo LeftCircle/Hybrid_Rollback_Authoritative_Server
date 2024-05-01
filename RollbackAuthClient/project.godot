@@ -21,6 +21,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 [application]
 
 config/name="RollbackAuthClient"
+config/tags=PackedStringArray("llsdemo")
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

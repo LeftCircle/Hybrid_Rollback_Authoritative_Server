@@ -26,6 +26,8 @@ void Packet::_bind_methods()
     BIND_ENUM_CONSTANT(DELETION);
     BIND_ENUM_CONSTANT(ITERATION_CHANGE);
     BIND_ENUM_CONSTANT(LOBBY);
+    BIND_ENUM_CONSTANT(INPUTS);
+    BIND_ENUM_CONSTANT(N_ENUM);
 }
 
 Packet::TYPE Packet::get_type() const

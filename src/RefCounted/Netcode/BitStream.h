@@ -39,7 +39,7 @@ namespace godot
 		static void _bind_methods();
 
 	public:
-		void init_buffer(int buffer_size = MAX_BYTES);
+		void init_buffer(int buffer_size);
 		void reset();
 
 		int get_scratch() { return scratch; }
