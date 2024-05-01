@@ -39,6 +39,7 @@ StableBufferSystem="*res://Singletons/Inputs/StableBufferSystem.gd"
 CommandFrameSyncSystem="*res://Singletons/CommandFrame/CommandFrameSyncSystem.gd"
 PacketFlow="*res://Singletons/Packets/PacketFlow.gd"
 ComponentSyncSystem="*res://Singletons/WorldState/ComponentSyncSystem.gd"
+InputBasedMoveSystem="*res://Singletons/StateSystems/InputBasedMoveSystem.gd"
 
 [editor_plugins]
 

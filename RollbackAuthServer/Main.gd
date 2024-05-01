@@ -9,3 +9,4 @@ func _physics_process(delta):
 	InputSystem.execute(CommandFrame.frame)
 	StableBufferSystem.execute()
 	CommandFrameSyncSystem.execute()
+	InputBasedMoveSystem.execute(delta)

@@ -34,7 +34,7 @@ func unregister(entity : BaseEntity) -> void:
 		move_components[index_to_remove] = last_move
 		id_to_index[id_of_last] = index_to_remove
 		index_to_id[index_to_remove] = id_of_last
-	
+
 	index_to_id.erase(index)
 	id_to_index.erase(id)
 
@@ -48,5 +48,5 @@ func execute(delta : float) -> void:
 		cbd.move_and_slide()
 		move.velocity = cbd.velocity
 		ComponentSyncSystem.sync_component_update(move)
-		
-	
+
+

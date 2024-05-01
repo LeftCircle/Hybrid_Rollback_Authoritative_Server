@@ -58,5 +58,3 @@ func _on_VerificationExpiration_timeout():
 				if connected_peers.has(key):
 					Server.return_token_verification_results(key, false)
 					Server.network.disconnect_peer(key)
-	#print("Awaiting verification dict: ")
-	#print(awaiting_verification_dict)

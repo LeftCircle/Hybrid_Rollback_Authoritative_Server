@@ -6,7 +6,6 @@ signal player_disconnected(network_id)
 var network = ENetMultiplayerPeer.new()
 var server_api = SceneMultiplayer.new()
 
-var packet_types = PacketTypes.new()
 var expected_tokens : Array = []
 var connected_players : Array[int] = []
 
@@ -27,9 +26,9 @@ func send_packet(packet : Packet) -> void:
 func _on_packet_received(id : int, packet) -> void:
 	packet = Array(packet)
 	var packet_type = packet.pop_back()
-	if packet_type == packet_types.INPUTS:
+	if packet_type == Packet.TYPE.INPUTS:
 		_receive_player_inputs(id, packet)
-	elif packet_type == packet_types.ITERATION_CHANGE:
+	elif packet_type == Packet.TYPE.ITERATION_CHANGE:
 		#TODO -> add player sync controller
 		#PlayerSyncController.client_is_at_normal_iterations(id)
 		pass
@@ -44,7 +43,7 @@ func _receive_player_inputs(id, packet : Array) -> void:
 		var instance_id = ObjectCreationRegistry.network_id_to_instance_id[id]
 		# TO DO -> error here if more than 255 players
 		packet += [instance_id]
-		packet += [packet_types.INPUTS]
+		packet += [Packet.TYPE.INPUTS]
 		for player_id in server_api.get_peers():
 			if player_id != id and player_id != 0:
 				server_api.send_bytes(packet, player_id, MultiplayerPeer.TRANSFER_MODE_UNRELIABLE)
