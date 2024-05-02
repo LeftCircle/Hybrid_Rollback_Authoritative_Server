@@ -6,6 +6,7 @@ func _ready():
 
 func _physics_process(delta):
 	CommandFrame.execute()
+	Server.execute()
 	InputSystem.execute(CommandFrame.frame)
 	StableBufferSystem.execute()
 	CommandFrameSyncSystem.execute()

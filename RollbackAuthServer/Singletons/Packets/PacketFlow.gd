@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 
 const TYPE_TO_MODE : Dictionary = {
 	Packet.TYPE.CREATION : MultiplayerPeer.TRANSFER_MODE_RELIABLE,

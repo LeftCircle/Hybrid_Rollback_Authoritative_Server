@@ -54,7 +54,5 @@ func _on_VerificationExpiration_timeout():
 			start_time = awaiting_verification_dict[key].Timestamp
 			if current_time - start_time >= 30:
 				awaiting_verification_dict.erase(key)
-				var connected_peers = Array(get_tree().get_peers())
-				if connected_peers.has(key):
-					Server.return_token_verification_results(key, false)
-					Server.network.disconnect_peer(key)
+				Server.return_token_verification_results(key, false)
+				Server.network.disconnect_peer(key)

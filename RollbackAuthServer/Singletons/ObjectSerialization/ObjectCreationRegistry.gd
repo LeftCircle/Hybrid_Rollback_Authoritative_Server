@@ -85,5 +85,6 @@ func reverse_cantor(cantor_number : int):
 
 func _exit_tree() -> void:
 	for id in class_id_to_resource:
-		class_id_to_resource[id].free()
+		if class_id_to_resource[id].is_class("Node"):
+			class_id_to_resource[id].free()
 

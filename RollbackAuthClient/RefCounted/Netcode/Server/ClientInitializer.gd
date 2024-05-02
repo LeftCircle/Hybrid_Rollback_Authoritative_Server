@@ -21,9 +21,9 @@ func _connect_network_and_server(scene_tree : SceneTree, network : ENetMultiplay
 	scene_tree.multiplayer_poll = false
 
 func _connect_to_server_api_functions(server_api : SceneMultiplayer, server_node : Node):
-	#server_api.connection_failed.connect(server_node._on_connection_failed)
-	#server_api.connected_to_server.connect(server_node._on_connection_succeeded)
-	server_api.peer_packet.connect(server_node._on_packet_from_server)
+	server_api.connection_failed.connect(server_node._on_connection_failed)
+	server_api.connected_to_server.connect(server_node._on_connection_succeeded)
+	server_api.peer_packet.connect(server_node._on_packet_received)
 
 func _check_status(client_status, network : ENetMultiplayerPeer) -> void:
 	if client_status != OK:

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce113agcyjbcj"]
+
+[ext_resource type="Script" path="res://Singletons/Server.gd" id="1_r7rv4"]
+[ext_resource type="PackedScene" uid="uid://c2udynm5kwfuc" path="res://Scenes/UI/Login/Login.tscn" id="2_lyr6w"]
+
+[node name="Server" type="Node" node_paths=PackedStringArray("login_screen")]
+script = ExtResource("1_r7rv4")
+login_screen = NodePath("LoginScreen")
+
+[node name="LoginScreen" parent="." instance=ExtResource("2_lyr6w")]
+grow_horizontal = 2
+grow_vertical = 2

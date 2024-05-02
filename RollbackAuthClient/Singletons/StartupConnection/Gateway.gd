@@ -8,7 +8,6 @@ var login_path = "/root/SceneHandler/LoginScreen"
 
 var network = ENetMultiplayerPeer.new()
 var gateway_api = SceneMultiplayer.new()
-var ip # Set from Server.gd
 # MUST match the port on the gateway server
 var port = 28838 # 1910 on tutorial
 var certificate = load("res://Assets/Certificate/X509_Certificate.crt")
@@ -17,8 +16,12 @@ var username : String
 var password : String
 var new_account := false
 
-func _ready():
-	ip = Server.ip
+var local_ip = "127.0.0.1"
+var server_ip = "20.185.61.230"
+var ip : String
+
+func _ready() -> void:
+	var ip = local_ip if ProjectSettings.get_setting("global/connect_to_local") else server_ip
 
 func _physics_process(_delta):
 	if not gateway_api.has_multiplayer_peer():

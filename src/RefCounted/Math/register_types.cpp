@@ -1,6 +1,7 @@
 #include "register_types.h"
 
 #include "InputVecQuantizer.h"
+#include "WrapAroundFunctions.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp\core\defs.hpp>
@@ -17,6 +18,7 @@ void initialize_math_module(ModuleInitializationLevel p_level)
 
     // The order matters here. If Packet extends from BitStream, it must come after BitStream.
     ClassDB::register_class<InputVecQuantizer>();
+    ClassDB::register_class<WrapAroundFunctions>();
 }
 
 void uninitialize_math_module(ModuleInitializationLevel p_level)

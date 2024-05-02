@@ -11,6 +11,9 @@ var connected_players : Array[int] = []
 
 @export var lobby : Node
 
+func execute() -> void:
+	server_api.poll()
+
 func _ready() -> void:
 	var server_initalizer = ServerInitializer.new()
 	server_initalizer.init_server(get_tree(), network, server_api, self)
@@ -54,6 +57,8 @@ func _receive_player_inputs(id, packet : Array) -> void:
 
 func _on_peer_connected(player_id):
 	PlayerVerification.start(player_id)
+	await get_tree().process_frame
+	print("Peer connected. Sending for the token from %s" % [player_id])
 	rpc_id(player_id, "get_token_rpc")
 
 func on_player_verified(player_id : int) -> void:
@@ -66,10 +71,21 @@ func _on_peer_disconnected(player_id):
 @rpc("any_peer")
 func return_token(token):
 	var player_id = server_api.get_remote_sender_id()
+	print("We should be starting player verification for %s" % [player_id])
 	PlayerVerification.verify(player_id, token)
+
+@rpc("any_peer")
+func get_token_rpc():
+	# RPC calls are annoying. Both projects must have this function
+	pass
 
 func return_token_verification_results(player_id : int, result : bool) -> void:
 	rpc_id(player_id, "return_token_verification_results_rpc", result)
+
+@rpc("any_peer")
+func return_token_verification_results_rpc(result):
+	# RPC calls are annoying. Both projects must have this function
+	pass
 
 func _create_token_expiration_timer():
 	var timer = Timer.new()
@@ -96,26 +112,3 @@ func _on_token_expiration_timeout():
 ######### Syncing players in the lobby.
 ####################################################################################################
 
-@rpc("any_peer")
-func lobby_ready_button_activated_rpc() -> void:
-	var player_id = server_api.get_remote_sender_id()
-	lobby.player_ready(player_id)
-
-@rpc("any_peer")
-func lobby_ready_button_deactivated_rpc() -> void:
-	var player_id = server_api.get_remote_sender_id()
-	var lobby = get_node_or_null("/root/SceneHandler/Lobby")
-	lobby.player_not_ready(player_id)
-
-func sync_command_frames(player_id : int, latency : float, clients_ahead_by, client_buffer : int) -> void:
-	var synced_frame = int(round(latency) + CommandFrame.frame) + clients_ahead_by + client_buffer
-	rpc_id(player_id, "receive_synced_command_frame", synced_frame)
-
-@rpc("any_peer")
-func receive_command_frame_sync_complete():
-	var player_id = server_api.get_remote_sender_id()
-	lobby.player_command_step_synced(player_id)
-
-func send_starting_command_step(player_id : int, starting_command_step : int) -> void:
-	rpc_id(player_id, "receive_starting_command_step", starting_command_step)
-	print("Sending start command step of ", starting_command_step)

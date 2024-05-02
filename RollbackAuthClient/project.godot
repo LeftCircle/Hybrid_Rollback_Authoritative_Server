@@ -22,8 +22,14 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="RollbackAuthClient"
 config/tags=PackedStringArray("llsdemo")
+run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Server="*res://Singletons/Server.tscn"
+Gateway="*res://Singletons/StartupConnection/Gateway.gd"
 
 [editor_plugins]
 
@@ -38,3 +44,7 @@ folder_colors={
 "res://Singletons/": "purple",
 "res://Tests/": "red"
 }
+
+[global]
+
+connect_to_local=true

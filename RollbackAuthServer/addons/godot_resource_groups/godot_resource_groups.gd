@@ -13,10 +13,10 @@ func _enter_tree():
 
 func _exit_tree():
 	remove_tool_menu_item("Rebuild project resource groups")
-	
+
 func _save_external_data():
 	_rebuild_resource_groups()
-	
+
 
 func _rebuild_resource_groups():
 	var groups = _group_scanner.scan()
@@ -25,7 +25,7 @@ func _rebuild_resource_groups():
 		var resource_scanner = ResourceScanner.new(group)
 		var resource_paths = resource_scanner.scan()
 		group.paths = resource_paths
-		
+
 		ResourceSaver.save(group)
 		get_editor_interface().get_resource_filesystem().update_file(group.resource_path)
 
