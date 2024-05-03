@@ -84,7 +84,7 @@ static func compress_vector_into_x_bits(bitstream : BitStream, vec : Vector2, n_
 
 static func compress_float_into_x_bits(bitstream : BitStream, in_float : float, n_bits : int, signed = false, n_decimals = 3):
 	var float_to_int = int(round(in_float * pow(10.0, n_decimals)))
-	compress_int_into_x_bits(float_to_int, n_bits, signed)
+	compress_int_into_x_bits(bitstream, float_to_int, n_bits, signed)
 
 static func compress_bool(bitstream : BitStream, bool_var : bool) -> void:
 	gaffer_write_int(bitstream, int(bool_var), 1)

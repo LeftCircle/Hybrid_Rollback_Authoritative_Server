@@ -11,6 +11,8 @@ namespace godot
 	class BitStream : public RefCounted
 	{
 		GDCLASS(BitStream, RefCounted)
+		friend class BitStreamWriter;
+		friend class BitStreamReader;
 
 	public:
 		static const int WORD_SIZE = 32;
@@ -29,7 +31,7 @@ namespace godot
 		static const int BITS_FOR_FRAME = BYTES_FOR_FRAME * 8;
 
 	protected:
-		int scratch;
+		int64_t scratch;
 		int scratch_bits;
 		int word_index;
 		int total_bits;

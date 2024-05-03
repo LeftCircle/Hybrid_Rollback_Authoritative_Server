@@ -2,6 +2,9 @@
 
 #include "BitStream.h"
 #include "Packet.h"
+#include "Compression\BaseCompression.h"
+#include "Compression\BitStreamWriter.h"
+#include "Compression\BitStreamReader.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp\core\defs.hpp>
@@ -19,6 +22,9 @@ void initialize_netcode_module(ModuleInitializationLevel p_level)
     // The order matters here. If Packet extends from BitStream, it must come after BitStream.
     ClassDB::register_class<BitStream>();
     ClassDB::register_class<Packet>();
+    ClassDB::register_class<BaseCompression>();
+    ClassDB::register_class<BitStreamWriter>();
+    ClassDB::register_class<BitStreamReader>();
 }
 
 void uninitialize_netcode_module(ModuleInitializationLevel p_level)
