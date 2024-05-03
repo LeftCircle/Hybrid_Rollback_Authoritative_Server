@@ -16,20 +16,37 @@ namespace godot
 	protected:
 		static void _bind_methods();
 
+		float frame_length_sec;
+		float frame_length_msec;
+		int frame;
+		int input_buffer;
+
+		int input_frame;
+		int previous_command_frame;
+
 	public:
-		const int MAX_FRAME_NUMBER = 16777215;
-		const int MAX_FRAME_FOR_MOD = MAX_FRAME_NUMBER + 1;
-		const int HALF_MAX_FRAME = MAX_FRAME_NUMBER / 2;
-
-		float frame_length_sec = 1.0 / float(ProjectSettings::get_singleton()->get_setting("physics/common/physics_ticks_per_second", 60));
-		float frame_length_msec = frame_length_sec * 1000;
-		int frame = 0;
-		int input_buffer = ProjectSettings::get_singleton()->get_setting("global/input_buffer", 0);
-
-		int input_frame = 0;
-		int previous_command_frame = -1;
+		static const int MAX_FRAME_NUMBER = 16777216;
+		static const int HALF_MAX_FRAME = MAX_FRAME_NUMBER / 2;
 
 		void execute();
+
+		float get_frame_length_sec() { return frame_length_sec; }
+		void set_frame_length_sec(const float p_frame_length_sec) { frame_length_sec = p_frame_length_sec; }
+
+		float get_frame_length_msec() { return frame_length_msec; }
+		void set_frame_length_msec(const float p_frame_length_msec) { frame_length_msec = p_frame_length_msec; }
+
+		int get_frame() { return frame; }
+		void set_frame(const int p_frame) { frame = p_frame; }
+
+		int get_input_buffer() { return input_buffer; }
+		void set_input_buffer(const int p_input_buffer) { input_buffer = p_input_buffer; }
+
+		int get_input_frame() { return input_frame; }
+		void set_input_frame(const int p_input_frame) { input_frame = p_input_frame; }
+
+		int get_previous_command_frame() { return previous_command_frame; }
+		void set_previous_command_frame(const int p_previous_command_frame) { previous_command_frame = p_previous_command_frame; }
 
 		S_CommandFrame();
 		~S_CommandFrame();

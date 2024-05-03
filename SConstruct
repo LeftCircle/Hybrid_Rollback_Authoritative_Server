@@ -14,8 +14,8 @@ env = SConscript("godot-cpp/SConstruct")
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=["src/"])
-sources = [Glob("src/RefCounted/Netcode/*.cpp"), Glob("src/Refcounted/Math/*.cpp")]
-source_lib_names = ["libnetcode", "libmath"]
+sources = [Glob("src/RefCounted/Netcode/*.cpp"), Glob("src/Refcounted/Math/*.cpp"), Glob("src/Singletons/*.cpp")]
+source_lib_names = ["libnetcode", "libmath", "libsingletons"]
 target_dir = ["RollbackAuthClient", "RollbackAuthServer", "D:\Godot\Projects\gdextension_cpp_example\GDExtensionCpp"]
 
 libraries = []

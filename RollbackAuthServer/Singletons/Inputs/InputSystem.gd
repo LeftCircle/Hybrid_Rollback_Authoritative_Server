@@ -53,14 +53,14 @@ func _set_input_actions(frame : int) -> void:
 		_set_inputs_from_history(input_hist, input_actions, frame, buffer)
 
 func _set_inputs_from_history(input_history : InputHistory, input_actions : InputAction, frame : int, buffer : StableBufferData) -> void:
-	var previous_frame : int = CommandFrame.get_previous_frame(frame)
+	var previous_frame : int = WrapAroundFunctions.advance(frame, -1, CommandFrame.MAX_FRAME_NUMBER)
 	input_actions.previous_inputs = _get_inputs_or_duplicate_for_frame(previous_frame, input_history, buffer)
 	input_actions.current_inputs = _get_inputs_or_duplicate_for_frame(frame, input_history, buffer)
 
 func _get_inputs_or_duplicate_for_frame(frame : int, history : InputHistory, buffer : StableBufferData) -> InputData:
 	var frame_inputs : InputData = _read_input(history, frame, buffer)
 	if not frame_inputs.is_from_client:
-		var previous_frame : int = CommandFrame.get_previous_frame(frame)
+		var previous_frame : int = WrapAroundFunctions.advance(frame, -1, CommandFrame.MAX_FRAME_NUMBER)
 		var previous_index : int = previous_frame % history.HISTORY_SIZE
 		var previous_frame_inputs : InputData = history.input_array[previous_index]
 		frame_inputs.set_data_with_obj(previous_frame_inputs)

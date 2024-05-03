@@ -14,6 +14,7 @@ void initialize_singletons_module(ModuleInitializationLevel p_level)
     {
         return;
     }
+    ClassDB::register_class<S_CommandFrame>();
 }
 
 void uninitialize_singletons_module(ModuleInitializationLevel p_level)

@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://l1q4nld01cg7"]
+
+[node name="CommandFrame" type="S_CommandFrame"]

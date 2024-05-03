@@ -47,7 +47,7 @@ func test_read_frame_not_from_client() -> void:
 	var input = _get_test_input(frame, true)
 	var buffer : StableBufferData = StableBufferData.new()
 	InputSystem._write_input(input_history, input, buffer)
-	var next_frame = CommandFrame.next_frame(frame)
+	var next_frame = WrapAroundFunctions.advance(frame, 1, CommandFrame.MAX_FRAME_NUMBER)
 	var read_input = InputSystem._read_input(input_history, next_frame, buffer)
 	assert_eq(buffer.current_bufffer_in_frames, 1)
 
@@ -73,7 +73,7 @@ func test_decrement_only_occurs_once() -> void:
 	var input = _get_test_input(frame, true)
 	var buffer : StableBufferData = StableBufferData.new()
 	InputSystem._write_input(input_history, input, buffer)
-	var previous_frame = CommandFrame.get_previous_frame(frame)
+	var previous_frame = WrapAroundFunctions.advance(frame, -1, CommandFrame.MAX_FRAME_NUMBER)
 	var previous_input = _get_test_input(previous_frame, true)
 	InputSystem._write_input(input_history, previous_input, buffer)
 
@@ -96,6 +96,6 @@ func _get_test_input(frame : int, is_from_client : bool) -> InputData:
 func random_frame() -> int:
 	var frame = randi() % CommandFrame.MAX_FRAME_NUMBER
 	CommandFrame.frame = frame
-	CommandFrame.previous_command_frame = CommandFrame.get_previous_frame(frame)
-	CommandFrame.input_frame = CommandFrame.get_previous_frame(frame, CommandFrame.input_buffer)
+	CommandFrame.previous_command_frame = WrapAroundFunctions.advance(frame, -1, CommandFrame.MAX_FRAME_NUMBER)
+	CommandFrame.input_frame = WrapAroundFunctions.advance(frame, -CommandFrame.input_buffer, CommandFrame.MAX_FRAME_NUMBER)
 	return frame
