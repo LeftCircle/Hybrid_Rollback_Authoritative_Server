@@ -20,7 +20,7 @@ sources = [
     Glob("src/Singletons/*.cpp")
     ]
 source_lib_names = ["libnetcode", "libmath", "libsingletons"]
-target_dir = ["RollbackAuthClient", "RollbackAuthServer", "D:\Godot\Projects\gdextension_cpp_example\GDExtensionCpp"]
+target_dir = ["RollbackAuthClient", "RollbackAuthServer"]
 
 libraries = []
 

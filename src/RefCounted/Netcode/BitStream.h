@@ -1,7 +1,7 @@
 #ifndef BITSTREAM_H
 #define BITSTREAM_H
 
-#include <godot_cpp/classes/ref.hpp>
+#include <godot_cpp\classes\ref.hpp>
 #include <godot_cpp\core\binder_common.hpp>
 #include <godot_cpp\core\defs.hpp>
 #include <godot_cpp\variant\utility_functions.hpp>

@@ -1,7 +1,7 @@
 {
     "editor.formatOnSave": true,
     "C_Cpp.intellisSenseEngine": "default",
-    "godotTools.editorPath.godot4": "c:\\Godot\\Source\\godot-4.2.2-ManualPhysics\\bin\\godot.windows.editor.x86_64.exe",
+    "godotTools.editorPath.godot4": "E:\\Godot\\Source\\4.2.2_ManualPhysics\bin\\godot.windows.editor.x86_64.exe",
     "files.associations": {
         "cassert": "cpp",
         "compare": "cpp"

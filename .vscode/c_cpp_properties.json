@@ -3,7 +3,11 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/godot-cpp/include/godot_cpp/**",
+                "${workspaceFolder}/godot-cpp/include",
+                "${workspaceFolder}/godot-cpp/gen/include",
+                "${workspaceFolder}/godot-cpp/gdextension"
             ],
             "defines": [
                 "_DEBUG",

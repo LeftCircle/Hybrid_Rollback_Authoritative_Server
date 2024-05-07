@@ -1,5 +1,5 @@
 extends RefCounted
-class_name BitStreamWriter
+#class_name BitStreamWriter
 
 static func gaffer_write_int(bitstream : BitStream, inData : int, inBitCount : int) -> void:
 	if inBitCount > 32 or bitstream.scratch_bits > 32:
