@@ -3,6 +3,13 @@ import os
 import sys
 
 env = SConscript("godot-cpp/SConstruct")
+# Add C++20 standard flag
+if env['CC'].startswith('cl'):
+    # Microsoft compiler
+    env.Append(CXXFLAGS=['/std:c++20'])
+else:
+    # Other compilers (like GCC and Clang)
+    env.Append(CXXFLAGS=['-std=c++20'])
 
 # For reference:
 # - CCFLAGS are compilation flags shared between C and C++
@@ -14,6 +21,7 @@ env = SConscript("godot-cpp/SConstruct")
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=["src/"])
+
 sources = [
     Glob("src/RefCounted/Netcode/*.cpp") + Glob("src/RefCounted/Netcode/Compression/*.cpp"),
     Glob("src/Refcounted/Math/*.cpp"),

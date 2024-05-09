@@ -19,6 +19,27 @@ void BitStream::_bind_methods()
 	BIND_CONSTANT(BYTES_FOR_FRAME);
 	BIND_CONSTANT(BITS_FOR_FRAME);
 
+	// rl::bind_member_function(BitStream, init_buffer);
+	// rl::bind_member_function(BitStream, reset);
+	// rl::bind_member_function(BitStream, get_scratch);
+	// rl::bind_member_function(BitStream, set_scratch);
+	// rl::bind_member_function(BitStream, get_scratch_bits);
+	// rl::bind_member_function(BitStream, set_scratch_bits);
+	// rl::bind_member_function(BitStream, get_word_index);
+	// rl::bind_member_function(BitStream, set_word_index);
+	// rl::bind_member_function(BitStream, get_total_bits);
+	// rl::bind_member_function(BitStream, set_total_bits);
+	// rl::bind_member_function(BitStream, get_read_bits);
+	// rl::bind_member_function(BitStream, set_read_bits);
+	// rl::bind_member_function(BitStream, get_buffer);
+	// rl::bind_member_function(BitStream, set_buffer);
+
+	// rl::bind_property(BitStream, scratch, int);
+	// rl::bind_property(BitStream, scratch_bits, int);
+	// rl::bind_property(BitStream, word_index, int);
+	// rl::bind_property(BitStream, total_bits, int);
+	// rl::bind_property(BitStream, read_bits, int);
+
 	ClassDB::bind_method(D_METHOD("init_buffer", "buffer_size"), &BitStream::init_buffer, DEFVAL(MAX_BYTES));
 
 	ClassDB::bind_method(D_METHOD("reset"), &BitStream::reset);
@@ -46,6 +67,7 @@ void BitStream::_bind_methods()
 	ClassDB::add_property("BitStream", PropertyInfo(Variant::INT, "word_index"), "set_word_index", "get_word_index");
 	ClassDB::add_property("BitStream", PropertyInfo(Variant::INT, "total_bits"), "set_total_bits", "get_total_bits");
 	ClassDB::add_property("BitStream", PropertyInfo(Variant::INT, "read_bits"), "set_read_bits", "get_read_bits");
+	ClassDB::add_property("BitStream", PropertyInfo(Variant::PACKED_BYTE_ARRAY, "buffer"), "set_buffer", "get_buffer");
 }
 
 void BitStream::init_buffer(int buffer_size)

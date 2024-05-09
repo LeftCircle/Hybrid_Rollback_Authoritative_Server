@@ -6,6 +6,9 @@
 #include <godot_cpp\core\defs.hpp>
 #include <godot_cpp\variant\utility_functions.hpp>
 
+#include "core/attributes.hpp"
+// #include "util/bind.hpp"
+
 namespace godot
 {
 	class BitStream : public RefCounted
@@ -44,20 +47,17 @@ namespace godot
 		void init_buffer(int buffer_size);
 		void reset();
 
-		int get_scratch() { return scratch; }
-		void set_scratch(const int value) { scratch = value; }
+		[[property]] int get_scratch() { return scratch; }
+		[[property]] int get_scratch_bits() { return scratch_bits; }
+		[[property]] int get_word_index() { return word_index; }
+		[[property]] int get_total_bits() { return total_bits; }
+		[[property]] int get_read_bits() { return read_bits; }
 
-		int get_scratch_bits() { return scratch_bits; }
-		void set_scratch_bits(const int value) { scratch_bits = value; }
-
-		int get_word_index() { return word_index; }
-		void set_word_index(const int value) { word_index = value; }
-
-		int get_total_bits() { return total_bits; }
-		void set_total_bits(const int value) { total_bits = value; }
-
-		int get_read_bits() { return read_bits; }
-		void set_read_bits(const int value) { read_bits = value; }
+		[[property]] void set_scratch(const int value) { scratch = value; }
+		[[property]] void set_scratch_bits(const int value) { scratch_bits = value; }
+		[[property]] void set_word_index(const int value) { word_index = value; }
+		[[property]] void set_total_bits(const int value) { total_bits = value; }
+		[[property]] void set_read_bits(const int value) { read_bits = value; }
 
 		PackedByteArray get_buffer() { return mBuffer; }
 		void set_buffer(PackedByteArray value) { mBuffer = value; }

@@ -1,24 +1,24 @@
 {
-    "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/godot-cpp/include/godot_cpp/**",
-                "${workspaceFolder}/godot-cpp/include",
-                "${workspaceFolder}/godot-cpp/gen/include",
-                "${workspaceFolder}/godot-cpp/gdextension"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.22621.0",
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
-        }
-    ],
-    "version": 4
+	"configurations": [
+		{
+			"name": "Win32",
+			"includePath": [
+				"${workspaceFolder}/**",
+				"${workspaceFolder}/godot-cpp/include/godot_cpp/**",
+				"${workspaceFolder}/godot-cpp/include",
+				"${workspaceFolder}/godot-cpp/gen/include",
+				"${workspaceFolder}/godot-cpp/gdextension"
+			],
+			"defines": [
+				"_DEBUG",
+				"UNICODE",
+				"_UNICODE"
+			],
+			"windowsSdkVersion": "10.0.22621.0",
+			"cStandard": "c23",
+			"cppStandard": "c++23",
+			"intelliSenseMode": "windows-msvc-x64"
+		}
+	],
+	"version": 4
 }
