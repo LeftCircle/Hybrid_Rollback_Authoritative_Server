@@ -8,6 +8,7 @@
 #include <godot_cpp/variant/string_name.hpp>
 
 #include "api/extension_interface.hpp"
+#include "Singletons/CommandFrame.h"
 // #include "entity/camera.hpp"
 // #include "entity/character/character.hpp"
 // #include "entity/character/enemy.hpp"
@@ -25,15 +26,20 @@
 namespace rl
 {
 	// static inline console *console_singleton{nullptr};
+	static inline godot::CommandFrame *command_frame_singleton{nullptr};
 
 	void initialize_static_objects()
 	{
+		command_frame_singleton = memnew(godot::CommandFrame);
+		godot::Engine::get_singleton()->register_singleton("CommandFrame", command_frame_singleton);
 		// console_singleton = memnew(console);
 		// rl::engine::get()->register_singleton("Console", console::get());
 	}
 
 	void teardown_static_objects()
 	{
+		godot::Engine::get_singleton()->unregister_singleton("CommandFrame");
+		memdelete(command_frame_singleton);
 		// rl::engine::get()->unregister_singleton("Console");
 		// memdelete(console_singleton);
 	}
@@ -42,6 +48,8 @@ namespace rl
 	{
 		if (init_level != godot::MODULE_INITIALIZATION_LEVEL_SCENE)
 			return;
+		// It might make sense to register all classes from everywhere here into one big .dll instead of several others?
+		godot::ClassDB::register_class<godot::CommandFrame>();
 
 		// godot::ClassDB::register_class<rl::Projectile>();
 		// godot::ClassDB::register_class<rl::ProjectileSpawner>();

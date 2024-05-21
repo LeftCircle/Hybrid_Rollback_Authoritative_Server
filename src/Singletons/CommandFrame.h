@@ -9,20 +9,12 @@
 
 namespace godot
 {
-	class S_CommandFrame : public Node
+	class CommandFrame : public Node
 	{
-		GDCLASS(S_CommandFrame, Node)
+		GDCLASS(CommandFrame, Node)
 
 	protected:
 		static void _bind_methods();
-
-		float frame_length_sec;
-		float frame_length_msec;
-		int frame;
-		int input_buffer;
-
-		int input_frame;
-		int previous_command_frame;
 
 	public:
 		static const int MAX_FRAME_NUMBER = 16777216;
@@ -48,8 +40,20 @@ namespace godot
 		int get_previous_command_frame() { return previous_command_frame; }
 		void set_previous_command_frame(const int p_previous_command_frame) { previous_command_frame = p_previous_command_frame; }
 
-		S_CommandFrame();
-		~S_CommandFrame();
+		static inline CommandFrame *get_singleton() { return m_static_inst; }
+
+		CommandFrame();
+		~CommandFrame();
+
+	private:
+		float frame_length_sec;
+		float frame_length_msec;
+		int frame;
+		int input_buffer;
+
+		int input_frame;
+		int previous_command_frame;
+		static inline CommandFrame *m_static_inst{nullptr};
 	};
 }
 
