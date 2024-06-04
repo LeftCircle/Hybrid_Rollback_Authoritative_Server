@@ -32,7 +32,7 @@ func receive_input_packet(enet_id : int, packet : PackedByteArray) -> void:
 
 func execute(frame : int) -> void:
 	_read_input_packets()
-	var input_frame : int = CommandFrame.get_previous_frame(frame, input_buffer)
+	var input_frame : int = WrapAroundFunctions.get_previous(frame, input_buffer, CommandFrame.MAX_FRAME_NUMBER)
 	_set_input_actions(input_frame)
 
 func _read_input_packets() -> void:
@@ -79,7 +79,7 @@ func _read_input_data_into_hist(input_history : InputHistory, frame : int, scrat
 	while !BitStreamReader.is_finished(bit_stream):
 		_decompress_action_into(bit_stream, scratch_input, frame)
 		_write_input(input_history, scratch_input, buffer)
-		frame = CommandFrame.get_previous_frame(frame)
+		frame = WrapAroundFunctions.get_previous(frame, 1, CommandFrame.MAX_FRAME_NUMBER)
 
 func _write_input(input_history : InputHistory, input_data : InputData, buffer : StableBufferData) -> void:
 	var old_data : InputData = input_history.input_array[input_data.frame % InputHistory.HISTORY_SIZE]

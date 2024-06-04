@@ -9,6 +9,12 @@ void WrapAroundFunctions::_bind_methods()
 	ClassDB::bind_static_method("WrapAroundFunctions", D_METHOD("difference", "future", "past", "max_value", "half_max_val"), &WrapAroundFunctions::difference);
 	ClassDB::bind_static_method("WrapAroundFunctions", D_METHOD("advance", "value", "advance_by", "max_value"), &WrapAroundFunctions::advance);
 	ClassDB::bind_static_method("WrapAroundFunctions", D_METHOD("get_max", "a", "b"), &WrapAroundFunctions::get_max);
+	ClassDB::bind_static_method("WrapAroundFunctions", D_METHOD("get_previous", "starting_value", "n_back", "max_value"), &WrapAroundFunctions::get_previous);
+}
+
+int WrapAroundFunctions::get_previous(const int starting_value, const int n_back, const int max_value)
+{
+	return UtilityFunctions::posmod(starting_value - n_back, max_value);
 }
 
 bool WrapAroundFunctions::is_greater_than(const int future, const int past, const int half_max_val)
