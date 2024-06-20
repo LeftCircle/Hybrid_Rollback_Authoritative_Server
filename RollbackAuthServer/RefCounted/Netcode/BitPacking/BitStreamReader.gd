@@ -1,5 +1,5 @@
 extends RefCounted
-class_name BitStreamReader
+#class_name BitStreamReader
 
 
 # The array MUST have the last x bytes be the total number of bits

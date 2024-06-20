@@ -27,30 +27,58 @@ sources = [
     Glob("src/Refcounted/Math/*.cpp"),
     Glob("src/Singletons/*.cpp")
     ]
+linker = ["src/api/extension_interface.cpp"]
 source_lib_names = ["libnetcode", "libmath", "libsingletons"]
 target_dir = ["RollbackAuthClient", "RollbackAuthServer"]
 
 libraries = []
 
-for directory in target_dir:
-    index = 0
-    print("Building for {}".format(directory))
-    for src in sources:
-        lib_name = source_lib_names[index]
+all_sources = []
+for paths in sources:
+    all_sources += paths
+all_sources += linker
+
+master_lib_name = "libRollbackAuth"
+
+def build_library(sources, lib_name, target_dir, libraries=[]):
+    for dir in target_dir:
         if env["platform"] == "macos":
             library = env.SharedLibrary(
                 "{}}/bin/{}.{}.{}.framework/{}}.{}.{}".format(
-                    directory, lib_name, env["platform"], env["target"], lib_name, env["platform"], env["target"]
+                    dir, lib_name, env["platform"], env["target"], lib_name, env["platform"], env["target"]
                 ),
-                source=src,
+                source=sources,
             )
         else:
             library = env.SharedLibrary(
-                "{}/bin/{}{}{}".format(directory, lib_name, env["suffix"], env["SHLIBSUFFIX"]),
-                source=src,
+                "{}/bin/{}{}{}".format(dir, lib_name, env["suffix"], env["SHLIBSUFFIX"]),
+                source=sources,
             )
-            print("Library should have been created: {}/bin/{}{}{}".format(directory, lib_name, env["suffix"], env["SHLIBSUFFIX"]))
-        index += 1
         libraries.append(library)
+    Default(libraries)
 
-Default(libraries)
+
+build_library(all_sources, master_lib_name, target_dir)
+
+# for directory in target_dir:
+#     index = 0
+#     print("Building for {}".format(directory))
+#     for src in sources:
+#         lib_name = source_lib_names[index]
+#         if env["platform"] == "macos":
+#             library = env.SharedLibrary(
+#                 "{}}/bin/{}.{}.{}.framework/{}}.{}.{}".format(
+#                     directory, lib_name, env["platform"], env["target"], lib_name, env["platform"], env["target"]
+#                 ),
+#                 source=src,
+#             )
+#         else:
+#             library = env.SharedLibrary(
+#                 "{}/bin/{}{}{}".format(directory, lib_name, env["suffix"], env["SHLIBSUFFIX"]),
+#                 source=src,
+#             )
+#             print("Library should have been created: {}/bin/{}{}{}".format(directory, lib_name, env["suffix"], env["SHLIBSUFFIX"]))
+#         index += 1
+#         libraries.append(library)
+
+# Default(libraries)

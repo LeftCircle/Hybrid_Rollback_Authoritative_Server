@@ -9,65 +9,52 @@
 
 #include "api/extension_interface.hpp"
 #include "Singletons/CommandFrame.h"
-// #include "entity/camera.hpp"
-// #include "entity/character/character.hpp"
-// #include "entity/character/enemy.hpp"
-// #include "entity/character/player.hpp"
-// #include "entity/controller/character_controller.hpp"
-// #include "entity/controller/enemy_controller.hpp"
-// #include "entity/controller/player_controller.hpp"
-// #include "entity/level.hpp"
-// #include "entity/projectile/projectile_spawner.hpp"
-// #include "main.hpp"
-// #include "singletons/console.hpp"
-// #include "ui/main_dialog.hpp"
-// #include "util/engine.hpp"
+
+// Math Includes
+#include "RefCounted\Math\InputVecQuantizer.h"
+#include "RefCounted\Math\WrapAroundFunctions.h"
+
+// Netcode Includes
+#include "RefCounted\Netcode\BitStream.h"
+#include "RefCounted\Netcode\Packet.h"
+#include "RefCounted\Netcode\Compression\BaseCompression.h"
+#include "RefCounted\Netcode\Compression\BitStreamWriter.h"
+#include "RefCounted\Netcode\Compression\BitStreamReader.h"
+
+// Singletons
+#include "Singletons\CommandFrame.h"
 
 namespace rl
 {
-	// static inline console *console_singleton{nullptr};
 	static inline godot::CommandFrame *command_frame_singleton{nullptr};
 
 	void initialize_static_objects()
 	{
 		command_frame_singleton = memnew(godot::CommandFrame);
 		godot::Engine::get_singleton()->register_singleton("CommandFrame", command_frame_singleton);
-		// console_singleton = memnew(console);
-		// rl::engine::get()->register_singleton("Console", console::get());
 	}
 
 	void teardown_static_objects()
 	{
 		godot::Engine::get_singleton()->unregister_singleton("CommandFrame");
 		memdelete(command_frame_singleton);
-		// rl::engine::get()->unregister_singleton("Console");
-		// memdelete(console_singleton);
 	}
 
 	void initialize_extension_module(godot::ModuleInitializationLevel init_level)
 	{
 		if (init_level != godot::MODULE_INITIALIZATION_LEVEL_SCENE)
 			return;
-		// It might make sense to register all classes from everywhere here into one big .dll instead of several others?
 		godot::ClassDB::register_class<godot::CommandFrame>();
 
-		// godot::ClassDB::register_class<rl::Projectile>();
-		// godot::ClassDB::register_class<rl::ProjectileSpawner>();
+		godot::ClassDB::register_class<godot::InputVecQuantizer>();
+		godot::ClassDB::register_class<godot::WrapAroundFunctions>();
 
-		// godot::ClassDB::register_abstract_class<rl::CharacterController>();
-		// godot::ClassDB::register_class<rl::PlayerController>(true);
-		// godot::ClassDB::register_class<rl::EnemyController>();
+		godot::ClassDB::register_class<godot::BitStream>();
+		godot::ClassDB::register_class<godot::Packet>();
 
-		// godot::ClassDB::register_class<rl::Camera>();
-		// godot::ClassDB::register_class<rl::Character>();
-		// godot::ClassDB::register_class<rl::Enemy>();
-		// godot::ClassDB::register_class<rl::Player>();
-
-		// godot::ClassDB::register_class<rl::Level>();
-		// godot::ClassDB::register_class<rl::MainDialog>();
-		// godot::ClassDB::register_class<rl::Main>();
-
-		// godot::ClassDB::register_class<console>();
+		godot::ClassDB::register_class<godot::BaseCompression>();
+		godot::ClassDB::register_class<godot::BitStreamWriter>();
+		godot::ClassDB::register_class<godot::BitStreamReader>();
 
 		initialize_static_objects();
 	}
