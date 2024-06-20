@@ -27,7 +27,7 @@ sources = [
     Glob("src/Refcounted/Math/*.cpp"),
     Glob("src/Singletons/*.cpp")
     ]
-linker = ["src/api/extensions_interface.cpp"]
+linker = ["src/api/extension_interface.cpp"]
 source_lib_names = ["libnetcode", "libmath", "libsingletons"]
 target_dir = ["RollbackAuthClient", "RollbackAuthServer"]
 
@@ -45,13 +45,13 @@ def build_library(sources, lib_name, target_dir, libraries=[]):
         if env["platform"] == "macos":
             library = env.SharedLibrary(
                 "{}}/bin/{}.{}.{}.framework/{}}.{}.{}".format(
-                    target_dir, lib_name, env["platform"], env["target"], lib_name, env["platform"], env["target"]
+                    dir, lib_name, env["platform"], env["target"], lib_name, env["platform"], env["target"]
                 ),
                 source=sources,
             )
         else:
             library = env.SharedLibrary(
-                "{}/bin/{}{}{}".format(target_dir, lib_name, env["suffix"], env["SHLIBSUFFIX"]),
+                "{}/bin/{}{}{}".format(dir, lib_name, env["suffix"], env["SHLIBSUFFIX"]),
                 source=sources,
             )
         libraries.append(library)

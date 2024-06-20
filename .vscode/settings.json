@@ -9,4 +9,5 @@
 		"tuple": "cpp",
 		"string": "cpp"
 	},
+	"C_Cpp.default.compilerPath": "cl.exe",
 }
