@@ -1,7 +1,7 @@
 extends RefCounted
 #class_name BitStreamWriter
 
-static func gaffer_write_int(bitstream : BitStream, inData : int, inBitCount : int) -> void:
+static func write_int(bitstream : BitStream, inData : int, inBitCount : int) -> void:
 	if inBitCount > 32 or bitstream.scratch_bits > 32:
 		assert(false) #," We must handle the case of writing values greater than 32 bits")
 	# Shift the data to the left to insert it into the end of the scratch
@@ -45,11 +45,11 @@ static func flush_scratch_to_buffer(bitstream : BitStream):
 static func compress_int_into_x_bits(bitstream : BitStream, inData : int, inBitCount : int, is_signed = false) -> void:
 	if is_signed:
 		var is_negative : int = 1 if inData < 0 else 0
-		gaffer_write_int(bitstream, is_negative, 1)
-		gaffer_write_int(bitstream, abs(inData), inBitCount - 1)
+		write_int(bitstream, is_negative, 1)
+		write_int(bitstream, abs(inData), inBitCount - 1)
 	else:
 		assert(inData >= 0) #," Cannot pass negative data without sign!")
-		gaffer_write_int(bitstream, inData, inBitCount)
+		write_int(bitstream, inData, inBitCount)
 
 static func compress_int_array(bitstream : BitStream, int_array : Array, is_signed = false) -> void:
 	var n_elements : int = int_array.size()
@@ -87,21 +87,21 @@ static func compress_float_into_x_bits(bitstream : BitStream, in_float : float, 
 	compress_int_into_x_bits(bitstream, float_to_int, n_bits, signed)
 
 static func compress_bool(bitstream : BitStream, bool_var : bool) -> void:
-	gaffer_write_int(bitstream, int(bool_var), 1)
+	write_int(bitstream, int(bool_var), 1)
 
 static func compress_unit_vector(bitstream : BitStream, invec : Vector2) -> void:
 	compress_float_into_x_bits(bitstream, invec.x, BitStream.UNIT_VECTOR_FLOAT_BITS, true)
 	compress_float_into_x_bits(bitstream, invec.y, BitStream.UNIT_VECTOR_FLOAT_BITS, true)
 
 static func compress_instance_id(bitstream : BitStream, instance_id : int) -> void:
-	gaffer_write_int(bitstream, instance_id, BitStream.N_CLASS_INSTANCE_BITS)
+	write_int(bitstream, instance_id, BitStream.N_CLASS_INSTANCE_BITS)
 
 static func compress_class_id(bitstream : BitStream, class_id : int) -> void:
 	assert(class_id <= 878500) #,"id is greater than the max cantor of 'ZZZ'")
-	gaffer_write_int(bitstream, class_id, BitStream.N_CLASS_ID_BITS)
+	write_int(bitstream, class_id, BitStream.N_CLASS_ID_BITS)
 
 static func compress_frame(bitstream : BitStream, frame : int) -> void:
-	gaffer_write_int(bitstream, frame, BitStream.BITS_FOR_FRAME)
+	write_int(bitstream, frame, BitStream.BITS_FOR_FRAME)
 
 static func compress_quantized_input_vec(bit_stream : BitStream, input_vec : Vector2) -> void:
 	var quantized_length = InputVecQuantizer.get_quantized_length(input_vec)
@@ -128,15 +128,15 @@ static func write_bits_into(byte_array : PackedByteArray, inData : int, bit_star
 	var bits_at_start : int = bit_start % 8
 	var bits_to_keep : int = BitStreamReader.read_arbitrary_bits(bytes_to_adjust, 0, bits_at_start)
 
-	BitStreamWriter.gaffer_write_int(write_stream, bits_to_keep, bits_at_start)
-	BitStreamWriter.gaffer_write_int(write_stream, inData, inBitCount)
+	BitStreamWriter.write_int(write_stream, bits_to_keep, bits_at_start)
+	BitStreamWriter.write_int(write_stream, inData, inBitCount)
 
 	# to find how many bits are left over at the end, figure out how many bits are left in the word
 	# starting at the byte_start after the inData has been added
 	var bits_left_in_word : int = n_bytes_to_adjust * 8 - write_stream.total_bits
 	# write the remaining bits from the read stream
 	var end_bits_to_keep : int = BitStreamReader.read_arbitrary_bits(bytes_to_adjust, write_stream.total_bits, bits_left_in_word)
-	BitStreamWriter.gaffer_write_int(write_stream, end_bits_to_keep, bits_left_in_word)
+	BitStreamWriter.write_int(write_stream, end_bits_to_keep, bits_left_in_word)
 	var byte_to_rewrite = BitStreamWriter.get_byte_array(write_stream)
 	# Write the stream back into the byte array
 	for i in range(byte_start, byte_end):
