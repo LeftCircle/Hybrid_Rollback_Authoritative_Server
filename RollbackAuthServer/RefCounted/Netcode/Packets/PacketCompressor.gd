@@ -11,4 +11,4 @@ func compress(packet : Packet) -> void:
 	BitStreamWriter.write_int(packet, packet.type, BITS_FOR_TYPE)
 
 func decompress(into_packet : Packet) -> void:
-	into_packet.type = BitStreamReader.gaffer_read(into_packet, BITS_FOR_TYPE)
+	into_packet.type = BitStreamReader.read(into_packet, BITS_FOR_TYPE)

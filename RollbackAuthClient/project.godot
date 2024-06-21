@@ -30,7 +30,6 @@ config/icon="res://icon.svg"
 
 Server="*res://Singletons/Server.tscn"
 Gateway="*res://Singletons/StartupConnection/Gateway.gd"
-CommandFrame="*res://Singletons/cppSingletons/CommandFrame.tscn"
 
 [editor_plugins]
 
