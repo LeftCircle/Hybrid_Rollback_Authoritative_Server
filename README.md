@@ -1,6 +1,6 @@
 # Hybrid Rollback Authoritative Server Networking
 
-This is a work in progress cleaning/converting two and a half years of work from a previous project into a more extendable, readable, and reusable solution. This networking solution creates networked components that will be synced between clients and an authoritative server. Each client will predict their gameplay state based on their own inputs and predicted/received inputs from other players. The authoritative server will then send the actual state of the world to clients, who will then roll back and re-predict if any mismatch occurs. This solution is ideal for a top down shooter or hack and slash game where you must respect both the view of the shooter and the dodger. 
+This is a work in progress cleaning/converting two and a half years of work from a competitive multiplayer rogue like battle royale into a more extendable, readable, and reusable solution. This networking solution creates networked components that will be synced between clients and an authoritative server. Each client will perform rollback predictions and corrections that are validated by an authoritative server. This allows larger lobbies and worlds since the authoritative server can dictate what each client needs to know about and predict. This solution is ideal for a top down shooter or hack and slash game where you must respect both the view of the shooter and the dodger. 
 
 ## Usage
 
